@@ -1,0 +1,1 @@
+{"name":"@passage/domain","version":"0.1.0","private":true,"type":"module","exports":"./src/index.ts","scripts":{"build":"tsc --noEmit","typecheck":"tsc --noEmit","test":"tsx --test test/*.test.ts"},"dependencies":{"zod":"^3.24.2"},"devDependencies":{"tsx":"^4.20.0","typescript":"^5.8.3","@types/node":"^22.15.0"}}

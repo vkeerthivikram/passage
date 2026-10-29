@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Passage Clipper", "version": "0.1.0",
+  "description": "Save selected passages to your own Passage server.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "optional_host_permissions": ["https://*/*", "http://localhost/*", "http://127.0.0.1/*"],
+  "action": {"default_popup": "popup.html", "default_title": "Save to Passage"},
+  "browser_specific_settings": {"gecko": {"id": "clipper@passage.local", "strict_min_version": "128.0"}}
+}

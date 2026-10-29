@@ -1,0 +1,14 @@
+{
+  "name": "passage", "private": true, "version": "0.1.0", "license": "AGPL-3.0-only",
+  "packageManager": "pnpm@10.28.2", "engines": {"node": ">=22"},
+  "scripts": {
+    "dev": "concurrently -n api,web \"pnpm --filter @passage/api dev\" \"pnpm --filter @passage/web dev\"",
+    "build": "pnpm --filter @passage/domain build && pnpm --filter @passage/api build && pnpm --filter @passage/web build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r --if-present test",
+    "android": "pnpm --filter @passage/android start",
+    "db:migrate": "pnpm --filter @passage/api migrate",
+    "worker": "pnpm --filter @passage/api worker"
+  },
+  "devDependencies": {"concurrently": "^9.2.1", "typescript": "^5.9.3", "@types/node": "^22.19.0", "@playwright/test": "^1.56.1"}
+}

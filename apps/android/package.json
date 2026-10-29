@@ -1,0 +1,31 @@
+{
+  "name": "@passage/android",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "prebuild": "expo prebuild --platform android",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "expo": "~55.0.0",
+    "expo-background-task": "~55.0.0",
+    "expo-crypto": "~55.0.0",
+    "expo-dev-client": "~55.0.0",
+    "expo-image-picker": "~55.0.0",
+    "expo-modules-core": "~55.0.0",
+    "expo-secure-store": "~55.0.0",
+    "expo-sqlite": "~55.0.0",
+    "expo-task-manager": "~55.0.0",
+    "react": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-safe-area-context": "~5.6.2"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.0",
+    "typescript": "~5.9.2"
+  },
+  "expo": { "autolinking": { "nativeModulesDir": "./modules" } }
+}

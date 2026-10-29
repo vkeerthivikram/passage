@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Passage Clipper</title><link rel="stylesheet" href="popup.css"><body>
+<h1>Passage</h1><p>Keep a thought worth returning to.</p>
+<form id="capture"><label>Your Passage server<input id="server" type="url" placeholder="https://passage.example.com" required></label>
+<label>Integration token<input id="token" type="password" autocomplete="off" required></label>
+<button id="connect" type="button">Connect server</button>
+<label>Source title<input id="title" required maxlength="500"></label><label>Author<input id="author" maxlength="500"></label>
+<label>Passage<textarea id="text" rows="7" required maxlength="50000"></textarea></label>
+<label>Note<textarea id="note" rows="2"></textarea></label><label>Tags, separated by commas<input id="tags"></label>
+<button id="save" type="submit">Save highlight</button></form><p id="status" role="status" aria-live="polite"></p>
+<script src="popup.js"></script></body></html>

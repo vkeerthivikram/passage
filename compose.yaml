@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: passage
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: passage
+    volumes: [database:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U passage]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+  migrate:
+    build: .
+    command: [pnpm, --filter, '@passage/api', migrate]
+    environment: &environment
+      DATABASE_URL: postgres://passage:${POSTGRES_PASSWORD}@db:5432/passage
+      AUTH_SECRET: ${AUTH_SECRET:?Set AUTH_SECRET in .env}
+      AUTH_URL: ${AUTH_URL:-http://localhost:3001}
+      WEB_ORIGIN: ${WEB_ORIGIN:-http://localhost:3001}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY in .env}
+      DATA_DIR: /data
+      HOST: 0.0.0.0
+      PORT: 3001
+    depends_on:
+      db: {condition: service_healthy}
+  app:
+    build: .
+    environment: *environment
+    ports: ["${BIND_ADDRESS:-127.0.0.1}:${PORT:-3001}:3001"]
+    volumes: [files:/data]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+  worker:
+    build: .
+    command: [pnpm, --filter, '@passage/api', worker]
+    environment: *environment
+    volumes: [files:/data]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+volumes:
+  database:
+  files:

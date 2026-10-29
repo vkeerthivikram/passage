@@ -1,0 +1,2 @@
+import {betterAuth} from 'better-auth';import {pool} from './db.js';
+export function createAuth(){if(!process.env.AUTH_SECRET||process.env.AUTH_SECRET.length<32)throw new Error('AUTH_SECRET must contain at least 32 characters');return betterAuth({database:pool,secret:process.env.AUTH_SECRET,baseURL:process.env.AUTH_URL??'http://localhost:3001',trustedOrigins:[process.env.WEB_URL??'http://localhost:5173'],emailAndPassword:{enabled:true,minPasswordLength:12},advanced:{useSecureCookies:process.env.NODE_ENV==='production'}});}
